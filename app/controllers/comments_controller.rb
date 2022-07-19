@@ -1,35 +1,37 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!
+
+  def index
+    post = Post.find(params[:post_id])
+    render json: post.comments
+  end
+
   def new
     @comment = Comment.new
+    render :new
   end
 
   def create
-    @comment = Comment.new(comment_params)
-    @post = Post.includes(:author, :comments, :likes).find(params[:post_id])
-    @comment.author_id = current_user.id
-    @comment.post_id = params[:post_id]
+    comment_author = current_user
+    post = Post.find(params[:post_id])
+    post_author = post.user
+
+    comment = params[:comment]
+
+    new_comment = Comment.new(comment.permit(:text))
+    new_comment.post = post
+    new_comment.user = comment_author
+
+    return unless new_comment.save
 
     respond_to do |format|
-      if @comment.save
-        format.html { redirect_to user_post_path(user_id: @post.author_id, id: @post.id) }
-        flash[:notice] = 'Thanks for your comment.'
-      else
-        format.html { render :new, alert: 'An error has occurred while creating the comment!', class: 'alert-danger' }
+      format.html do
+        flash[:notice] = 'You commented.'
+        redirect_to user_post_url(post_author, post)
+      end
+      format.json do
+        render json: new_comment
       end
     end
-  end
-
-  def destroy
-    @comment = Comment.find(params[:id])
-    @post = @comment.post
-    @post.decrement!(:comments_counter)
-    @comment.destroy!
-    redirect_to "/users/#{@post.author_id}/posts/#{@post.id}", notice: 'Success!'
-  end
-
-  private
-
-  def comment_params
-    params.require(:comment).permit(:text)
   end
 end
