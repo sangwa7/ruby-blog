@@ -76,6 +76,12 @@ rspec
 - Twitter: [@sangwa_7](https://twitter.com/sangwa_7)
 - LinkedIn: [Didier Sangwa](https://www.linkedin.com/in/didier-sangwa)
 
+👤 **Debas Gebreslasie**
+
+- [GitHub](https://github.com/Debas-31)
+- [Twitter](https://twitter.com/DEBSH76956492)
+- [LinkedIn](https://www.linkedin.com/in/debas-gebrengus)
+
 
 
 ## 🤝 Contributing
