@@ -33,7 +33,7 @@ RSpec.describe Post, type: :model do
     end
   end
   context 'post.comments_counter' do
-    it 'has some value' do
+    it 'has some values' do
       the_post.comments_counter = nil
       expect(the_post).to_not be_valid
     end
