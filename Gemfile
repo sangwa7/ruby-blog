@@ -3,7 +3,15 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.2'
 
+
+gem 'ffi'
+
+gem 'tzinfo-data'
+
+gem 'rails-controller-testing'
+
 gem 'rubocop', '>= 1.0', '< 2.0'
+
 
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
