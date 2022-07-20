@@ -1,4 +1,5 @@
 require 'rails_helper'
+
 RSpec.describe Post, type: :model do
   let(:the_author) { User.create!(name: 'Omid', photo: 'https://via.placeholder.com/150', bio: 'Some text as bio!', posts_counter: 0) }
   let(:the_post) do
@@ -88,4 +89,3 @@ RSpec.describe Post, type: :model do
     end
   end
 end
-
