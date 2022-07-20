@@ -8,6 +8,8 @@ gem 'ffi'
 gem 'tzinfo-data'
 
 gem 'rails-controller-testing'
+
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.3'
 
@@ -42,8 +44,8 @@ gem 'jbuilder'
 # gem "bcrypt", "~> 3.1.7"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-# Reduces boot times through caching; required in config/boot.rb
 
+# Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
 
 # Use Sass to process CSS
