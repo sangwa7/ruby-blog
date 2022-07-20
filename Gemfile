@@ -3,21 +3,15 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.2'
 
-
 gem 'ffi'
 
 gem 'tzinfo-data'
 
 gem 'rails-controller-testing'
 
-gem 'rubocop', '>= 1.0', '< 2.0'
-
-
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.3'
-
-gem 'ffi', github: 'ffi/ffi', submodules: true
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails'
@@ -50,8 +44,7 @@ gem 'jbuilder'
 # gem "bcrypt", "~> 3.1.7"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-# gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
-gem 'tzinfo-data', '1.2022.1'
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
@@ -61,11 +54,14 @@ gem 'bootsnap', require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
+gem 'rubocop', '>= 1.0', '< 2.0'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
-  gem 'rails-controller-testing'
+end
+
+group :development, :test do
   gem 'rspec-rails'
 end
 
