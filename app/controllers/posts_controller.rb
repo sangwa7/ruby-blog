@@ -1,56 +1,35 @@
 class PostsController < ApplicationController
   def index
-
-    @posts = Post.includes(:user).where(user: params[:user_id])
-    respond_to do |format|
-      format.html
-      format.json { render json: @posts }
-    end
-=======
-
-    @user = User.includes(:posts, :comments, :likes).find(params[:user_id])
-    @posts = Post.all
-  end
-
-  def show
-    @post = Post.includes(:author, :comments, :likes).find(params[:id])
+    @user = current_user
+    @posts = @user.posts.includes(:comments)
   end
 
   def new
-    @post = Post.new
-
+    @new_post = Post.new
   end
 
   def create
-    post = params[:post]
     user = current_user
-
-    new_post = Post.new(post.permit(:title, :text))
-    new_post.comments_counter = 0
-    new_post.likes_counter = 0
-    new_post.user = user
-
-    if new_post.save
-      flash[:notice] = 'New post created successfully.'
-      redirect_to user_post_url(user, new_post)
+    post = Post.new(post_params)
+    post.author = user
+    post.comments_counter = 0
+    post.likes_counter = 0
+    if post.save
+      flash[:notice] = 'Post has been added successfully'
+      redirect_to user_posts_url
     else
-      flash[:error] = 'Creating new post failed!'
-      @post = new_post
-      render :new
+      flash[:alert] = 'Post was not was not saved!'
+      redirect_to new_user_post_url(user_id: user.id)
     end
   end
 
-  def new
-    @post = Post.new
-    render :new
+  def show
+    @post = Post.find(params[:id])
   end
 
+  private
 
-  def show
-    @post = Post.includes(:user, comments: [:user]).find(params[:id])
-=======
   def post_params
     params.require(:post).permit(:title, :text)
-
   end
 end

@@ -1,16 +1,21 @@
-<div class='container mt-4'>
-  <h1>Here are details of a user's post</h1>
-  <div class="posts">
-    <div class="post_comments">
-      <h4><%=@post.title%> by: <%=@post.author.name%></h4>
-      <span>Comments: <%=@post.comments_counter%>, Likes: <%=@post.likes_counter%></span>
-    </div>
-    <p><%=@post.text%></p>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Post</title>
+</head>
+<body>
+<section class="posts-container">
+<div class="hey">
+  <h4><%= @post.title %></h4>
+  <p class="push">Comments: <%= @post.comments_counter || 0%>, Likes: <%= @post.likes_counter || 0%></p>
+  <p><%= @post.text %></p>
   </div>
-
-  <div class= "comments">
-    <%@post.comments.each do |comment|%>
-     <p><%= comment.author.name %>: <%=comment.text%></p>
+  <%= render partial: 'likes/like', locals: {like: @like, post_id: @post.id} %>
+  <%= render partial: 'comment', locals: {post: @post, comments: @post.comments.includes(:author)}%>
+  <%= link_to new_user_post_comment_path(post_id: @post.id) do %>
+    <button class="btn">Create comment</button>
     <%end%>
-  </div>
-</div>
+  </section> 
+</body>
+</html>
